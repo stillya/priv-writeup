@@ -1,3 +1,4 @@
+import PIL
 import pyqrcode
 import zipfile
 from pyzbar.pyzbar import decode
@@ -7,10 +8,11 @@ import pyzipper
 
 GLOBAL_PATH = 'extracted/'
 
+
 def from_qr(path):
     img = cv2.imread(path)
     det = cv2.QRCodeDetector()
-    val, pts, st_code = det.detectAndDecode(img)
+    val = det.detectAndDecode(img)
     print('password - ' + val)
     return val
 
@@ -26,3 +28,5 @@ def unzip(path):
 
 for i in range(999, 0, -1):
     unzip(str(i))
+    if i == 1:
+        pyqrcode.QRCode(GLOBAL_PATH + '1.png').show()
